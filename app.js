@@ -622,16 +622,18 @@ async function loadAllCourses(currentUserId) {
 
                 const courseCard = document.createElement('div');
                 courseCard.classList.add('course-card');
+                let buttonHtml = `<button class="btn enroll-btn" data-course-id="${courseId}">Enroll</button>`;
+                if (isEnrolled) {
+                    buttonHtml = `<a href="course.html?id=${courseId}" class="btn">View Course</a>`;
+                }
                 courseCard.innerHTML = `
-                    <div class="course-card-image" style="background-image: url('https://via.placeholder.com/300x150.png?text=${course.title.replace(/ /g, '+')}')"></div>
+                    <div class="course-card-image" style="background-image: url('https://placehold.co/300x150?text=${course.title.replace(/ /g, '+')}')"></div>
                     <div class="course-card-content">
                         <h3>${course.title}</h3>
                         <p><strong>Code:</strong> ${course.code || 'N/A'}</p>
                         <p><strong>Credits:</strong> ${course.creditHours || 'N/A'}</p>
                         <p>${course.description ? course.description.substring(0,100) + '...' : 'No description available.'}</p>
-                        <button class="btn enroll-btn" data-course-id="${courseId}" ${isEnrolled ? 'disabled' : ''}>
-                            ${buttonText}
-                        </button>
+                        ${buttonHtml}
                     </div>`;
                 coursesContainer.appendChild(courseCard);
             }
@@ -754,6 +756,14 @@ async function loadCourseDetailsWithAccessCheck(currentUser, currentUserData) {
     }
     if (enrollment.currentStatus !== 'active') {
         courseDetailContent.innerHTML = `<p>Your enrollment for this course is currently <strong>${enrollment.currentStatus.replace('_', ' ')}</strong>. Course content is not accessible until enrollment is active.</p><p><a href="dashboard.html" class="btn">Back to Dashboard</a></p>`;
+        if (enrollment.currentStatus === 'pending_approval') {
+            const startLearningBtn = document.getElementById('start-learning-btn');
+            if (startLearningBtn) {
+                startLearningBtn.classList.remove('hidden');
+                startLearningBtn.textContent = 'Enrollment Pending';
+                startLearningBtn.disabled = true;
+            }
+        }
         return;
     }
 
@@ -802,6 +812,16 @@ async function loadCourseDetailsWithAccessCheck(currentUser, currentUserData) {
                 </div>
                 <button id="upload-assignment-btn" class="btn">Upload Assignment (Simulated)</button>`;
 
+            const startLearningBtn = document.getElementById('start-learning-btn');
+            if (startLearningBtn && enrollment.currentStatus === 'active') {
+                startLearningBtn.classList.remove('hidden');
+                startLearningBtn.addEventListener('click', () => {
+                    const modulesList = document.getElementById('modules-list');
+                    if (modulesList) {
+                        modulesList.classList.toggle('hidden');
+                    }
+                });
+            }
             document.querySelectorAll('.mark-complete-btn').forEach(button => {
                 button.addEventListener('click', () => markModuleComplete(currentUser.uid, courseId, button.dataset.moduleId, button));
             });
@@ -997,24 +1017,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
-    if (loginForm) {
-        console.log("Login form event listener ATTACHMENT attempted.");
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            console.log("Login form SUBMITTED by user.");
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            console.log("Attempting Firebase login for email:", email);
-            signInWithEmailAndPassword(auth, email, password)
-                .then(userCredential => {
-                    console.log('Firebase signInWithEmailAndPassword successful for UID:', userCredential.user.uid);
-                    loginForm.reset();
-                    if(authError) authError.textContent = '';
-                })
-                .catch(error => {
-                    console.error('Firebase signInWithEmailAndPassword FAILED:', error);
-                    if(authError) authError.textContent = `Login Error: ${error.message}`;
-                });
+    const applyNowBtn = document.getElementById('apply-now-btn');
+    if (applyNowBtn) {
+        applyNowBtn.addEventListener('click', () => {
+            showAuthSection();
         });
     }
     if (logoutButton) {
