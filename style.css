@@ -109,6 +109,22 @@ main {
     gap: 20px;
 }
 
+@media (max-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    nav ul li {
+        margin: 10px 0;
+    }
+    .course-list {
+        grid-template-columns: 1fr;
+    }
+}
+
 .course-card {
     background: #fff;
     border-radius: 10px;
@@ -119,7 +135,7 @@ main {
 
 .course-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.2);
 }
 
 .course-card-image {
@@ -155,6 +171,11 @@ main {
     margin-top: 10px;
 }
 
+.btn-large {
+    padding: 15px 30px;
+    font-size: 20px;
+}
+
 /* Footer */
 footer {
     background: rgba(0, 0, 0, 0.7);
@@ -171,6 +192,8 @@ footer {
 .centered-section {
     text-align: center;
     padding: 50px 0;
+    margin: 0 auto;
+    max-width: 800px;
 }
 
 /* Dropdown Button */

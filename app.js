@@ -64,6 +64,8 @@ async function uploadFileToStorage(file, path) {
     }
 }
 
+let authSectionVisible = false;
+
 function showAuthSection(e){
     console.log("showAuthSection: CALLED");
     if(e) e.preventDefault();
@@ -72,6 +74,7 @@ function showAuthSection(e){
     if (mainContentPages.home) mainContentPages.home.classList.add('hidden');
     if (loginForm) loginForm.classList.remove('hidden');
     if (signupForm) signupForm.classList.remove('hidden');
+    authSectionVisible = true;
 }
 
 function clearProfilePageData() {
@@ -1045,12 +1048,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log("onAuthStateChanged: Event FIRED. User object:", user);
         if (user) {
             console.log("onAuthStateChanged: User IS logged in. UID:", user.uid);
-            updateUIForLoggedInUser(user);
-            loadUserData(user);
+            if (!authSectionVisible) {
+                updateUIForLoggedInUser(user);
+                loadUserData(user);
+            }
         } else {
             console.log("onAuthStateChanged: User is NOT logged in.");
             updateUIForLoggedOutUser();
         }
+        authSectionVisible = false;
     });
 
     await ensureSampleDataIsPopulated(); // Ensure sample data exists on initial load.
