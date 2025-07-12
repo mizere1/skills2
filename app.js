@@ -69,10 +69,9 @@ function showAuthSection(e){
     if(e) e.preventDefault();
     if (authSection) authSection.classList.remove('hidden');
     if (welcomeMessage) welcomeMessage.classList.add('hidden');
-    if (mainContentPages.home && (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/'))) {
-        const coursesContainer = document.getElementById('courses-container');
-        if (coursesContainer) coursesContainer.innerHTML = '';
-    }
+    if (mainContentPages.home) mainContentPages.home.classList.add('hidden');
+    if (loginForm) loginForm.classList.remove('hidden');
+    if (signupForm) signupForm.classList.remove('hidden');
 }
 
 function clearProfilePageData() {
@@ -105,8 +104,10 @@ function clearProfilePageData() {
 
 // --- UI Update Functions (General) ---
 function showSection(sectionId) {
-    Object.values(mainContentPages).forEach(pageEl => {
-        if (pageEl) pageEl.classList.add('hidden');
+    Object.keys(mainContentPages).forEach(key => {
+        if (mainContentPages[key]) {
+            mainContentPages[key].classList.add('hidden');
+        }
     });
     if (mainContentPages[sectionId]) {
         mainContentPages[sectionId].classList.remove('hidden');
@@ -827,6 +828,7 @@ async function loadCourseDetailsWithAccessCheck(currentUser, currentUserData) {
             });
             document.getElementById('upload-assignment-btn').addEventListener('click', () => alert('Assignment upload is simulated. No actual file upload.'));
             loadCourseAssessments(courseId, currentUser.uid);
+            showSection('courseDetail');
         } else { courseDetailContent.innerHTML = '<p>Course details not found.</p>'; }
     } catch (error) { console.error("Error loading course details:", error); courseDetailContent.innerHTML = '<p>Error loading course details.</p>'; }
 }
