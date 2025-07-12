@@ -109,11 +109,50 @@ main {
     gap: 20px;
 }
 
-.course-item {
+.course-card {
     background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+}
+
+.course-card-image {
+    height: 150px;
+    background-color: #eee;
+    background-size: cover;
+    background-position: center;
+}
+
+.course-card-content {
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.course-card h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.course-card p {
+    color: #666;
+}
+
+.course-card .btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
 }
 
 /* Footer */
@@ -123,6 +162,57 @@ footer {
     text-align: center;
     padding: 20px 0;
     margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.centered-section {
+    text-align: center;
+    padding: 50px 0;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: transparent;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 /* Admin Page */

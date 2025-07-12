@@ -10,15 +10,20 @@
 <body>
     <nav>
         <div class="container">
-            <a href="index.html" class="logo"><img src="https://res.cloudinary.com/djuhngvo7/image/upload/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="Royal African College Logo" style="height: 50px;"></a>
+            <a href="index.html" class="logo"><img src="https://res.cloudinary.com/djuhngvo7/image/upload/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="Royal African College Logo" style="height: 100px;"></a>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#all-courses">Courses</a></li>
-                <li id="student-chat-nav-link" class="hidden"><a href="chat.html">Chat</a></li>
-                <li id="announcements-nav-link"><a href="dashboard.html#platform-news-section">Announcements</a></li>
-                <li id="admin-nav-link" class="hidden"><a href="admin.html">Admin</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#home-page">Home</a></li>
                 <li id="profile-nav-link" class="hidden"><a href="profile.html">Profile</a></li>
+                <li><a href="#all-courses">Courses</a></li>
+                <li id="announcements-nav-link"><a href="#platform-news-section">Announcements</a></li>
+                <li id="admin-nav-link" class="hidden"><a href="admin.html">Admin</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Explore More</a>
+                    <div class="dropdown-content">
+                        <a href="chat.html" id="student-chat-nav-link" class="hidden">Chat</a>
+                        <a href="#">Contact</a>
+                    </div>
+                </li>
                 <li id="auth-status"><a href="#" id="login-logout">Login</a></li>
             </ul>
         </div>
@@ -88,16 +93,24 @@
         </div>
     </header>
 
-    <main id="home-page" class="container page-content">
-        <section id="welcome-message">
-            <h1 style="font-size: 1.8em; margin-bottom: 0.5em;">Welcome to the University Learning Portal</h1> <!-- Adjusted style due to long signup -->
-            <p>Explore our courses and start your learning journey today.</p>
+    <main>
+        <section id="home-page" class="container page-content">
+            <section id="welcome-message" class="centered-section">
+                <h1 style="font-size: 1.8em; margin-bottom: 0.5em;">Welcome to the University Learning Portal</h1> <!-- Adjusted style due to long signup -->
+                <p>Explore our courses and start your learning journey today.</p>
+            </section>
+            <section id="all-courses">
+                <h2>Available Courses</h2>
+                <div id="courses-container" class="course-list">
+                    <!-- Courses will be dynamically loaded here -->
+                </div>
+            </section>
         </section>
-        <section id="all-courses">
-            <h2>Available Courses</h2>
-            <div id="courses-container" class="course-list">
-                <!-- Courses will be dynamically loaded here -->
-            </div>
+        <section id="platform-news-section" class="container page-content hidden centered-section">
+            <h2>Platform News & Updates</h2>
+            <ul id="platform-news-list" style="list-style-type: none; padding-left: 0;">
+                <li>Loading platform news...</li>
+            </ul>
         </section>
     </main>
 

@@ -10,15 +10,20 @@
 <body>
     <nav>
         <div class="container">
-            <a href="index.html" class="logo"><img src="https://res.cloudinary.com/djuhngvo7/image/upload/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="Royal African College Logo" style="height: 50px;"></a>
+            <a href="index.html" class="logo"><img src="https://res.cloudinary.com/djuhngvo7/image/upload/v1752329058/royal_african_college_transparent_1_v5gdmr.png" alt="Royal African College Logo" style="height: 100px;"></a>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#all-courses">Courses</a></li>
-                <li id="student-chat-nav-link" class="hidden"><a href="chat.html">Chat</a></li>
-                <li id="announcements-nav-link"><a href="dashboard.html#platform-news-section">Announcements</a></li>
-                <li id="admin-nav-link" class="hidden"><a href="admin.html">Admin</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="index.html#home-page">Home</a></li>
                 <li id="profile-nav-link" class="hidden"><a href="profile.html">Profile</a></li>
+                <li><a href="index.html#all-courses">Courses</a></li>
+                <li id="announcements-nav-link"><a href="index.html#platform-news-section">Announcements</a></li>
+                <li id="admin-nav-link" class="hidden"><a href="admin.html">Admin</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Explore More</a>
+                    <div class="dropdown-content">
+                        <a href="chat.html" id="student-chat-nav-link" class="hidden">Chat</a>
+                        <a href="#">Contact</a>
+                    </div>
+                </li>
                 <li id="auth-status"><a href="#" id="login-logout">Login</a></li>
             </ul>
         </div>

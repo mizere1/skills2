@@ -104,6 +104,15 @@ function clearProfilePageData() {
 }
 
 // --- UI Update Functions (General) ---
+function showSection(sectionId) {
+    Object.values(mainContentPages).forEach(pageEl => {
+        if (pageEl) pageEl.classList.add('hidden');
+    });
+    if (mainContentPages[sectionId]) {
+        mainContentPages[sectionId].classList.remove('hidden');
+    }
+}
+
 function updateUIForLoggedInUser(user) {
     console.log("--- updateUIForLoggedInUser: ENTERED for user:", user?.uid);
     if (loginLogoutNav) {
@@ -115,7 +124,7 @@ function updateUIForLoggedInUser(user) {
             handleLogout();
         });
     }
-    if (authSection) authSection.classList.add('hidden');
+    if (authSection) authSection.style.display = 'none';
 
     if (welcomeMessage && (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/'))) {
         welcomeMessage.classList.remove('hidden');
@@ -124,18 +133,10 @@ function updateUIForLoggedInUser(user) {
         else if(h1) h1.textContent = `Welcome!`;
     }
 
-    Object.values(mainContentPages).forEach(pageEl => {
-        if (pageEl) pageEl.classList.add('hidden');
-    });
-    const currentPage = window.location.pathname.split("/").pop();
-    const pageKey = currentPage.split('.')[0];
-    if (mainContentPages[pageKey] && mainContentPages[pageKey] !== null) {
-         mainContentPages[pageKey].classList.remove('hidden');
-    } else if (currentPage === '' || currentPage === 'index.html') {
-         if(mainContentPages.home) mainContentPages.home.classList.remove('hidden');
-    }
     const profileNavLink = document.getElementById('profile-nav-link');
     if(profileNavLink) profileNavLink.classList.remove('hidden');
+    const studentChatNavLink = document.getElementById('student-chat-nav-link');
+    if(studentChatNavLink) studentChatNavLink.classList.remove('hidden');
 }
 
 function updateUIForLoggedOutUser() {
@@ -622,13 +623,16 @@ async function loadAllCourses(currentUserId) {
                 const courseCard = document.createElement('div');
                 courseCard.classList.add('course-card');
                 courseCard.innerHTML = `
-                    <h3>${course.title}</h3>
-                    <p><strong>Code:</strong> ${course.code || 'N/A'}</p>
-                    <p><strong>Credits:</strong> ${course.creditHours || 'N/A'}</p>
-                    <p>${course.description ? course.description.substring(0,150) + '...' : 'No description available.'}</p>
-                    <button class="btn enroll-btn" data-course-id="${courseId}" ${isEnrolled ? 'disabled' : ''}>
-                        ${buttonText}
-                    </button>`;
+                    <div class="course-card-image" style="background-image: url('https://via.placeholder.com/300x150.png?text=${course.title.replace(/ /g, '+')}')"></div>
+                    <div class="course-card-content">
+                        <h3>${course.title}</h3>
+                        <p><strong>Code:</strong> ${course.code || 'N/A'}</p>
+                        <p><strong>Credits:</strong> ${course.creditHours || 'N/A'}</p>
+                        <p>${course.description ? course.description.substring(0,100) + '...' : 'No description available.'}</p>
+                        <button class="btn enroll-btn" data-course-id="${courseId}" ${isEnrolled ? 'disabled' : ''}>
+                            ${buttonText}
+                        </button>
+                    </div>`;
                 coursesContainer.appendChild(courseCard);
             }
             document.querySelectorAll('.enroll-btn:not([disabled])').forEach(button => {
@@ -922,9 +926,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         home: document.getElementById('home-page'),
         dashboard: document.getElementById('dashboard-page'),
         courseDetail: document.getElementById('course-detail-page'), // Corresponds to course.html
-        profile: document.getElementById('profile-page'),
+        profile: document.getElementById('user-profile'),
         admin: document.getElementById('admin-page'),
-        chat: document.querySelector('.chat-container') // Corresponds to chat.html
+        chat: document.querySelector('.chat-container'), // Corresponds to chat.html
+        'platform-news-section': document.getElementById('platform-news-section')
     };
 
     if (!auth || !db) {
@@ -1016,6 +1021,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log("Attaching logout listener to profile page button");
         logoutButton.addEventListener('click', handleLogout);
     }
+
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const sectionId = href.substring(1);
+                showSection(sectionId);
+            }
+        });
+    });
 
     onAuthStateChanged(auth, (user) => {
         console.log("onAuthStateChanged: Event FIRED. User object:", user);
