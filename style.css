@@ -1,14 +1,10 @@
-/*
-Main stylesheet for the University Portal.
-*/
-
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap');
 
 /* CSS Variables for color palette */
 :root {
     /* New University Palette */
-    --primary-navy-blue: #1A237E; /* Changed from #FFFFFF to dark blue */
+    --primary-navy-blue: #FFFFFF;
     --accent-gold: #FFB81C;
     --secondary-cool-gray: #F5F5F5;
     --contrast-dark-green: #14532D; /* For accents or specific highlights */
@@ -109,7 +105,7 @@ nav .container {
 }
 
 nav .logo {
-    color: var(--text-light); /* Changed from --text-dark to white */
+    color: var(--text-dark);
     font-weight: 700;
     font-size: 1.6em;
     font-family: 'Merriweather', serif; /* Serif for logo */
@@ -130,7 +126,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: var(--text-light); /* Changed from --text-dark to white */
+    color: var(--text-dark);
     font-weight: 500; /* Lato normal weight */
     font-family: 'Lato', sans-serif;
     padding: 0.6em 1em;
