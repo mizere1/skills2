@@ -92,14 +92,14 @@ async function addSampleCourses() {
             "exams": {
                 "exam1": {
                     "title": "Quiz 1",
-                    "date": Date.now() + (25 * 24 * 60 * 60 * 1000),
+                    "date": Date.now() + (25 * 24 * 60 * 60 * 1000), 
                     "duration": 60,
                     "weight": 25,
                     "topics": "Modules 1-2"
                 },
                 "exam2": {
                     "title": "Quiz 2",
-                    "date": Date.now() + (70 * 24 * 60 * 60 * 1000),
+                    "date": Date.now() + (70 * 24 * 60 * 60 * 1000), 
                     "duration": 60,
                     "weight": 25,
                     "topics": "Modules 3-4"
@@ -108,13 +108,13 @@ async function addSampleCourses() {
             "assignments": {
                 "assign1": {
                     "title": "Implementation Assignment 1",
-                    "dueDate": Date.now() + (20 * 24 * 60 * 60 * 1000),
+                    "dueDate": Date.now() + (20 * 24 * 60 * 60 * 1000), 
                     "weight": 25,
                     "description": "Implement sorting algorithms."
                 },
                  "assign2": {
                     "title": "Graph Problems",
-                    "dueDate": Date.now() + (50 * 24 * 60 * 60 * 1000),
+                    "dueDate": Date.now() + (50 * 24 * 60 * 60 * 1000), 
                     "weight": 25,
                     "description": "Solve graph theory problems."
                 }
@@ -203,7 +203,7 @@ async function addSampleAcademicTerms() {
             startDate: "2024-06-03",
             endDate: "2024-08-02",
             createdBy: "system_init",
-            createdAt: Date.now()
+            createdAt: Date.now() 
         }
     };
 
@@ -223,3 +223,4 @@ async function addSampleAcademicTerms() {
 // Or, if temporarily including this script directly in HTML for console use and not as module for app.js:
 // window.addSampleCourses = addSampleCourses;
 // window.addSampleAnnouncements = addSampleAnnouncements;
+// mizere
