@@ -76,7 +76,7 @@ p {
 }
 
 a {
-    color: var(--primary-navy-blue); /* Changed to navy for better default contrast */
+    color: var(--text-dark); /* Changed to navy for better default contrast */
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -169,7 +169,7 @@ header#auth-section.hidden {
 .auth-form h3 {
     margin-top:0;
     text-align: center;
-    color: var(--primary-navy-blue);
+    color: var(--text-dark);
     font-family: 'Merriweather', serif;
 }
 .auth-form label {
@@ -209,8 +209,8 @@ header#auth-section.hidden {
 .auth-form button {
     width: 100%;
     padding: 12px;
-    background-color: var(--primary-navy-blue);
-    color: var(--text-light);
+    background-color: var(--accent-gold);
+    color: var(--text-dark);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -291,7 +291,7 @@ header#auth-section.hidden {
 .course-card h3 {
     margin-top: 0;
     font-size: 1.5em; /* Merriweather */
-    color: var(--primary-navy-blue);
+    color: var(--text-dark);
     margin-bottom: 10px;
 }
 
@@ -496,7 +496,7 @@ footer {
 }
 
 .footer-links a {
-    color: rgba(255,255,255,0.8); /* Lato */
+    color: var(--text-dark); /* Lato */
     transition: color 0.3s;
 }
 
@@ -558,6 +558,12 @@ footer {
 }
 
 /* Responsive Design */
+@media (min-width: 769px) {
+    .desktop-nav {
+        display: flex;
+    }
+}
+
 @media (max-width: 768px) {
     .container {
         width: 95%;
@@ -568,6 +574,9 @@ footer {
         justify-content: space-between;
     }
 
+    .desktop-nav {
+        display: none;
+    }
 
     .hamburger {
         display: block;
